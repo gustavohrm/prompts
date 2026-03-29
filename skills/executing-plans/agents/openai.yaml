@@ -1,0 +1,4 @@
+interface:
+  display_name: "Executing Plans"
+  short_description: "Execute written plans with review checkpoints"
+  default_prompt: "Use $executing-plans to load the plan, review it critically, execute each task exactly, and stop instead of guessing when blocked."

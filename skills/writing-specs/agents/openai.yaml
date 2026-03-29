@@ -1,0 +1,4 @@
+interface:
+  display_name: "Writing Specs"
+  short_description: "Write approved designs as implementation-ready specs"
+  default_prompt: "Use $writing-specs to write the approved design to a spec, review it for gaps, and get approval before planning."
