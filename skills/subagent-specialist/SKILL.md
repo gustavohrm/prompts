@@ -1,6 +1,6 @@
 ---
 name: subagent-specialist
-description: Specialist workflow for planning, dispatching, reviewing, and integrating Codex subagents. Use when work should be split across fresh subagents with isolated context, when an implementation plan contains mostly independent tasks, when 2 or more unrelated bugs or failure clusters can be investigated in parallel, or when you want stronger quality through an implementer plus spec-review plus code-quality-review loop.
+description: Specialist workflow for planning, dispatching, reviewing, and integrating delegated workers. Use when work should be split across fresh workers with isolated context, when an implementation plan contains mostly independent tasks, when 2 or more unrelated bugs or failure clusters can be investigated in parallel, or when you want stronger quality through an implementer plus spec-review plus code-quality-review loop.
 ---
 
 # Subagent Specialist
@@ -12,13 +12,18 @@ Use fresh subagents as isolated workers while the main agent stays responsible f
 ## Core Principles
 
 - Default to isolated context. Give each subagent only the task-local context it needs.
-- Keep the controller responsible for planning, sequencing, model choice, and final integration.
+- Keep the controller responsible for planning, sequencing, tool strategy, and final integration.
 - Use one subagent per task or per independent problem domain.
 - Prefer explicit scope, constraints, and deliverables over open-ended prompts.
 - Review actual artifacts, not just the subagent's report.
 - Preserve the controller's context window for orchestration work.
 
-## Tool Mapping for Codex
+## Tool Compatibility
+
+- Keep instructions tool-agnostic and avoid provider-specific wording.
+- When behavior differs across tools, resolve conflicts in this order: OpenCode > Claude Code > Codex CLI > Gemini CLI.
+
+## Subagent Tool Mapping
 
 - Use `spawn_agent` to create a fresh worker. Prefer `fork_context: false` unless the task genuinely depends on the current thread's full context.
 - Use `send_input` when follow-up work belongs with the same subagent because it already holds the right task-local context.
@@ -72,7 +77,7 @@ Implementers should report one of four statuses:
 - `DONE`: Proceed to spec compliance review.
 - `DONE_WITH_CONCERNS`: Read the concerns before review. Resolve correctness or scope doubts before moving on.
 - `NEEDS_CONTEXT`: Provide the missing information and re-dispatch.
-- `BLOCKED`: Change something real before retrying. Add context, break up the task, choose a stronger model, or escalate to the user.
+- `BLOCKED`: Change something real before retrying. Add context, break up the task, choose a stronger execution profile, or escalate to the user.
 
 Never ignore a subagent that says it is stuck. If it reported `BLOCKED`, the setup, context, or task shape needs to change.
 
@@ -155,13 +160,13 @@ If the domains turn out not to be independent, stop treating them as parallel wo
 
 Use parallel dispatch at the top level and the structured review loop inside each workstream when the work is large enough to justify it. A typical example is three unrelated bug clusters investigated in parallel, where each accepted fix still goes through spec review and code quality review before final integration.
 
-## Model Selection
+## Execution Profile Selection
 
-- Use a fast model for mechanical, well-specified tasks touching 1 or 2 files.
-- Use a standard model for debugging, integration work, or multi-file implementation.
-- Use the strongest available model for architecture, task decomposition, and critical reviews.
+- Use a lightweight execution profile for mechanical, well-specified tasks touching 1 or 2 files.
+- Use a standard execution profile for debugging, integration work, or multi-file implementation.
+- Use the strongest available execution profile for architecture, task decomposition, and critical reviews.
 
-Signals that you should upgrade the model:
+Signals that you should increase execution depth:
 
 - ambiguous requirements
 - many interacting files

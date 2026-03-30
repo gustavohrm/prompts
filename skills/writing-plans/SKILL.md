@@ -17,6 +17,11 @@ Assume they are a skilled developer, but know almost nothing about the toolset o
 
 **Context:** This should be run in an isolated branch or worktree when the project uses that workflow.
 
+## Tool Compatibility
+
+- Keep instructions tool-agnostic and avoid provider-specific wording.
+- When behavior differs across tools, resolve conflicts in this order: OpenCode > Claude Code > Codex CLI > Gemini CLI.
+
 ## Save Plans To
 
 - Prefer `.docs/plans/YYYY-MM-DD-.md`.
@@ -152,7 +157,7 @@ Two execution options:
 
 1. Inline execution
    - Execute tasks in this session using `executing-plans`
-   - Best default in Codex
+   - Best default in this environment
 2. Delegated execution
    - If you explicitly want subagents, use `subagent-specialist`
    - Fresh worker per task or per independent workstream, with review between steps

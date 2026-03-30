@@ -15,6 +15,11 @@ Load the plan, review it critically, execute all tasks, and report when complete
 
 If the user explicitly asks for delegated or parallel execution and subagents are available, `subagent-specialist` may be a better fit than this skill.
 
+## Tool Compatibility
+
+- Keep instructions tool-agnostic and avoid provider-specific wording.
+- When behavior differs across tools, resolve conflicts in this order: OpenCode > Claude Code > Codex CLI > Gemini CLI.
+
 ## The Process
 
 ### Step 1: Load and Review Plan

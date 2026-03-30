@@ -27,6 +27,11 @@ You MUST create a task for each of these items and complete them in order:
 4. **Present design** - in sections scaled to their complexity, get user approval after each section
 5. **Transition to documentation** - invoke `writing-specs` to write the approved design down
 
+## Tool Compatibility
+
+- Keep instructions tool-agnostic and avoid provider-specific wording.
+- When behavior differs across tools, resolve conflicts in this order: OpenCode > Claude Code > Codex CLI > Gemini CLI.
+
 ## Process Flow
 
 ```text

@@ -13,6 +13,11 @@ Write the validated design as a complete spec, review it for planning readiness,
 
 **Announce at start:** "I'm using the writing-specs skill to write the spec."
 
+## Tool Compatibility
+
+- Keep instructions tool-agnostic and avoid provider-specific wording.
+- When behavior differs across tools, resolve conflicts in this order: OpenCode > Claude Code > Codex CLI > Gemini CLI.
+
 ## Save Specs To
 
 - Prefer `.docs/specs/YYYY-MM-DD--design.md`.
