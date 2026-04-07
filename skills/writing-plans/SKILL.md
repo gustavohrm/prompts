@@ -28,6 +28,16 @@ Assume they are a skilled developer, but know almost nothing about the toolset o
 - Before choosing the path, inspect the project for an existing structure and respect it if one is already in use, for example `docs/superpowers/plans/`, `.docs/plans/`, or another documented path.
 - User preferences for plan location override this default.
 
+## Status
+
+- Every plan must include `**Status:** Draft` near the top.
+- Valid statuses for spec and plan docs are `Draft`, `Approved`, `In Progress`, and `Implemented`.
+
+## Approval Gate
+
+- Only write a plan from a spec documented as `Approved`, unless the user explicitly asks you to proceed without documented approval.
+- Never mark a spec or plan `Approved` on your own. The user must update it, or you may update it only if they explicitly ask you to.
+
 ## Scope Check
 
 If the spec covers multiple independent subsystems, it should have been broken into sub-project specs during brainstorming. If it was not, suggest breaking this into separate plans, one per subsystem. Each plan should produce working, testable software on its own.
@@ -59,6 +69,8 @@ This structure informs the task decomposition. Each task should produce self-con
 
 ````markdown
 # [Feature Name] Implementation Plan
+
+**Status:** Draft
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use `executing-plans` to implement this plan task-by-task.
 > If the user explicitly wants delegated or parallel execution and subagents are available, `subagent-specialist` is also a valid execution path.
@@ -147,11 +159,19 @@ This is a checklist you run yourself, not a subagent dispatch.
 
 If you find issues, fix them inline. No need to re-review, just fix and move on. If you find a spec requirement with no task, add the task.
 
+## User Review Gate
+
+After saving the plan and completing self-review, ask the user to review it before execution.
+
+If they approve in chat but the document is still `Draft`, ask whether they want to update it themselves or want you to update it.
+
+Only hand off to `executing-plans` once the plan document says `Approved`, unless the user explicitly instructs you to execute without documented approval.
+
 ## Execution Handoff
 
-After saving the plan, offer execution choice:
+After the plan is documented as `Approved`, offer execution choice:
 
-**"Plan complete and saved to `[PLAN_FILE_PATH]`.
+**"Plan complete and saved to `[PLAN_FILE_PATH]` with status `Approved`.
 
 Two execution options:
 

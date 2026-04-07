@@ -9,7 +9,7 @@ metadata:
 
 Help turn ideas into fully formed designs through natural collaborative dialogue. Start by understanding the current project context, then ask questions one at a time to refine the idea.
 
-Once you understand what you're building, present the design and get user approval. Do NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and the user has approved it. This applies to every project regardless of perceived simplicity.
+Once you understand what you're building, present the design and get user approval. Do NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and the user has approved it. That approval only authorizes writing the spec. It does not approve the spec, the plan, or implementation. This applies to every project regardless of perceived simplicity.
 
 ## Anti-Pattern: "This Is Too Simple To Need A Design"
 

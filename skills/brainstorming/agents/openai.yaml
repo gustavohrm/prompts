@@ -1,4 +1,4 @@
 interface:
   display_name: "Brainstorming"
   short_description: "Turn ideas into approved designs before coding"
-  default_prompt: "Use $brainstorming to explore the idea, ask one question at a time, compare approaches, and get to an approved design before implementation."
+  default_prompt: "Use $brainstorming to explore the idea, ask one question at a time, compare approaches, and get to an approved design before writing the spec. Design approval does not approve planning or implementation."

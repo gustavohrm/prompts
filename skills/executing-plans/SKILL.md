@@ -9,7 +9,7 @@ metadata:
 
 ## Overview
 
-Load the plan, review it critically, execute all tasks, and report when complete.
+Load the plan, confirm documented approval, review it critically, execute all tasks, and report when complete.
 
 **Announce at start:** "I'm using the executing-plans skill to implement this plan."
 
@@ -24,10 +24,12 @@ If the user explicitly asks for delegated or parallel execution and subagents ar
 
 ### Step 1: Load and Review Plan
 
-1. Read the plan file.
-2. Review it critically and identify any questions or concerns about the plan.
-3. If there are concerns, raise them with the human partner before starting.
-4. If there are no concerns, create or update the session plan tracker and proceed.
+1. Read the plan file and any referenced spec.
+2. Confirm the plan is documented as `Approved`, and confirm the referenced spec is also documented as `Approved`.
+3. If either document is not documented as approved, stop and ask. Only continue without documented approval if the user explicitly tells you to.
+4. Review the plan critically and identify any questions or concerns about it.
+5. If there are concerns, raise them with the human partner before starting.
+6. If there are no concerns, create or update the session plan tracker and proceed.
 
 ### Step 2: Execute Tasks
 
@@ -44,6 +46,8 @@ After all tasks are complete and verified:
 
 - Run the final verification the plan requires.
 - Summarize what changed, what was verified, and any open issues.
+- Suggest updating the relevant spec and plan docs to reflect the completed work.
+- If the user wants you to make those doc updates, do them explicitly. Never assume approval or completion status on your own.
 - If the user asked for git follow-through such as staging, committing, pushing, or PR creation, handle that before closing out.
 
 ## When to Stop and Ask for Help
@@ -69,6 +73,7 @@ Do not force through blockers. Stop and ask.
 ## Remember
 
 - Review the plan critically first.
+- Check documented approval before starting implementation.
 - Follow plan steps exactly.
 - Do not skip verifications.
 - Stop when blocked, do not guess.
