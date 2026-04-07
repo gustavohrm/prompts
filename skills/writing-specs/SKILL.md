@@ -68,4 +68,6 @@ Wait for the user's response. If they request changes, make them and re-run the 
 ## Implementation Planning
 
 - Invoke `writing-plans` to create a detailed implementation plan.
+- Approved work should normally continue into planning and implementation that prefer subagents plus a new branch, atomic commits, and a PR at the end.
+- If repo conventions or the user ask for another approach, follow that instead.
 - Do NOT invoke `writing-plans` or any implementation skill before the written spec is documented as `Approved`, unless the user explicitly instructs otherwise.

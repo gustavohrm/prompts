@@ -9,13 +9,13 @@ metadata:
 
 ## Overview
 
-Write comprehensive implementation plans assuming the engineer has zero context for the codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, and how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.
+Write comprehensive implementation plans assuming the engineer has zero context for the codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, and how to test it. Give them the whole plan as bite-sized tasks. Prefer plans that assume delegated execution via subagents when practical. DRY. YAGNI. TDD. Frequent, atomic commits.
 
 Assume they are a skilled developer, but know almost nothing about the toolset or problem domain. Assume they do not know good test design very well.
 
 **Announce at start:** "I'm using the writing-plans skill to create the implementation plan."
 
-**Context:** This should be run in an isolated branch or worktree when the project uses that workflow.
+**Context:** Default to implementation on a new branch or isolated worktree, with atomic commits and a PR at the end. If repo conventions or explicit user instructions call for another approach, follow that instead.
 
 ## Tool Compatibility
 
@@ -73,7 +73,7 @@ This structure informs the task decomposition. Each task should produce self-con
 **Status:** Draft
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use `executing-plans` to implement this plan task-by-task.
-> If the user explicitly wants delegated or parallel execution and subagents are available, `subagent-specialist` is also a valid execution path.
+> Default implementation mode is delegated execution via subagents when available. Default git flow is a new branch, atomic commits, and a PR at the end unless repo conventions or explicit user instructions say otherwise.
 
 **Goal:** [One sentence describing what this builds]
 **Architecture:** [2-3 sentences about approach]
@@ -145,7 +145,7 @@ These are **plan failures** and must never appear:
 - Exact file paths always
 - Complete code in every step, if a step changes code, show the code
 - Exact commands with expected output
-- DRY, YAGNI, TDD, frequent commits
+- DRY, YAGNI, TDD, frequent atomic commits
 
 ## Self-Review
 
@@ -175,11 +175,13 @@ After the plan is documented as `Approved`, offer execution choice:
 
 Two execution options:
 
-1. Inline execution
-   - Execute tasks in this session using `executing-plans`
-   - Best default in this environment
-2. Delegated execution
-   - If you explicitly want subagents, use `subagent-specialist`
-   - Fresh worker per task or per independent workstream, with review between steps
+1. Delegated execution
+   - Default when subagents are available and the tasks can be split cleanly
+   - Use `executing-plans` with fresh workers per task or independent workstream
+2. Inline execution
+   - Use when the work is tightly coupled, subagents are unavailable, or you explicitly prefer inline
+   - Follow the same plan and verification steps in this session
+
+Default implementation workflow is a new branch, atomic commits, and a PR at the end unless repo conventions or your instructions say otherwise.
 
 Which approach?"**

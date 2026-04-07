@@ -92,6 +92,7 @@ The only skill you invoke after brainstorming is `writing-specs`.
 **Documentation:**
 
 - Invoke `writing-specs` to write the validated design to a spec document.
+- Set the expectation that approved work normally continues with subagent-first planning and implementation on a new branch, with atomic commits and a PR at the end, unless the repo or user calls for another path.
 - Do NOT invoke `writing-plans` directly from brainstorming.
 
 ## Key Principles
