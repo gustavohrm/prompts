@@ -9,9 +9,9 @@ metadata:
 
 ## Overview
 
-Write comprehensive implementation plans assuming the engineer has zero context for the codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, and how to test it. Give them the whole plan as bite-sized tasks. Prefer plans that assume delegated execution via subagents when practical. DRY. YAGNI. TDD. Frequent, atomic commits.
+Write implementation-ready plans for a low-context engineer. Document the file map, task sequence, relevant docs, constraints, and verification needed to execute safely without guessing. Keep the plan concrete, but do not pre-write the full implementation unless the shape is fragile or non-obvious. Prefer plans that assume delegated execution via subagents when practical. DRY. YAGNI. TDD. Use frequent, atomic commits when the workflow calls for them.
 
-Assume they are a skilled developer, but know almost nothing about the toolset or problem domain. Assume they do not know good test design very well.
+Assume they are a skilled developer, but know almost nothing about the toolset or problem domain.
 
 **Announce at start:** "I'm using the writing-plans skill to create the implementation plan."
 
@@ -55,13 +55,11 @@ This structure informs the task decomposition. Each task should produce self-con
 
 ## Bite-Sized Task Granularity
 
-**Each step is one action, 2-5 minutes:**
+**Each task should be a coherent, verifiable unit of work:**
 
-- "Write the failing test" - step
-- "Run it to make sure it fails" - step
-- "Implement the minimal code to make the test pass" - step
-- "Run the tests and make sure they pass" - step
-- "Commit" - step
+- Split into smaller steps only when sequencing, validation, or rollback boundaries are fragile.
+- Keep tightly coupled work together instead of exploding it into artificial micro-steps.
+- Include commit guidance only when the workflow or user explicitly calls for it, or when a milestone boundary matters.
 
 ## Plan Document Header
 
@@ -89,42 +87,23 @@ Steps use checkbox (`- [ ]`) syntax for tracking.
 ````markdown
 ### Task N: [Component Name]
 
+**Goal:** [What this task completes]
+
 **Files:**
 - Create: `exact/path/to/file.py`
-- Modify: `exact/path/to/existing.py:123-145`
+- Modify: `exact/path/to/existing.py`
 - Test: `tests/exact/path/to/test.py`
 
-- [ ] **Step 1: Write the failing test**
+- [ ] **Implement the task**
 
-```python
-def test_specific_behavior():
-    result = function(input)
-    assert result == expected
-```
+Implementation notes:
+- [Key behavior, interfaces, constraints, and patterns to follow]
+- [Reference an earlier helper or task when relevant, and restate what changes]
 
-- [ ] **Step 2: Run test to verify it fails**
+- [ ] **Verify the task**
 
-Run: `pytest tests/path/test.py::test_name -v`
-Expected: FAIL with "function not defined"
-
-- [ ] **Step 3: Write minimal implementation**
-
-```python
-def function(input):
-    return expected
-```
-
-- [ ] **Step 4: Run test to verify it passes**
-
-Run: `pytest tests/path/test.py::test_name -v`
+Run: `pytest tests/path/test.py -v`
 Expected: PASS
-
-- [ ] **Step 5: Commit**
-
-```bash
-git add tests/path/test.py src/path/file.py
-git commit -m "feat: add specific feature"
-```
 ````
 
 ## No Placeholders
@@ -135,17 +114,17 @@ These are **plan failures** and must never appear:
 
 - "TBD", "TODO", "implement later", "fill in details"
 - "Add appropriate error handling" / "add validation" / "handle edge cases"
-- "Write tests for the above" without actual test code
-- "Similar to Task N" - repeat the code, the engineer may be reading tasks out of order
-- Steps that describe what to do without showing how, code blocks required for code steps
-- References to types, functions, or methods not defined in any task
+- "Write tests for the above" without stating what behavior to verify and how to run it
+- "Similar to Task N" or "same as above" without pointing to the earlier task or helper and stating what changes
+- Steps that describe what to do without giving enough detail to execute safely
+- References to types, functions, or methods not defined anywhere in the plan or spec
 
 ## Remember
 
-- Exact file paths always
-- Complete code in every step, if a step changes code, show the code
-- Exact commands with expected output
-- DRY, YAGNI, TDD, frequent atomic commits
+- Prefer exact file paths when known. If they are not yet certain, identify the owning area and the discovery needed before editing.
+- Make the plan concrete enough to execute without guesswork. Include exact code only when interface shape, migrations, commands, or test structure are non-obvious.
+- Exact commands with expected output when verification matters
+- DRY, YAGNI, TDD, and milestone-based commit guidance when the workflow calls for it
 
 ## Self-Review
 
