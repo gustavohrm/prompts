@@ -23,13 +23,15 @@ Use fresh subagents as isolated workers while the main agent stays responsible f
 - Keep instructions tool-agnostic and avoid provider-specific wording.
 - When behavior differs across tools, resolve conflicts in this order: OpenCode > Claude Code > Codex CLI > Gemini CLI.
 
-## Subagent Tool Mapping
+## Delegation Lifecycle
 
-- Use `spawn_agent` to create a fresh worker. Prefer `fork_context: false` unless the task genuinely depends on the current thread's full context.
-- Use `send_input` when follow-up work belongs with the same subagent because it already holds the right task-local context.
-- Use `wait_agent` sparingly. Only wait when the next critical-path step is blocked on that result.
-- Use `close_agent` when a subagent is no longer useful.
-- Respect the host environment's subagent policy. If the environment only allows subagents after explicit user permission, do not bypass that rule.
+- Use the host environment's delegation mechanism to start a fresh worker when isolated execution is helpful.
+- Prefer isolated, task-local context over copying the full session unless the task genuinely depends on broader context.
+- Reuse the same worker for follow-up work only when it already holds the right local context and reuse reduces setup cost.
+- Wait for worker results only when the next critical-path step depends on them.
+- End or discard workers that are no longer useful, according to the host environment's workflow.
+- Respect the host environment's delegation policy. If the environment only allows delegated workers after explicit user permission, do not bypass that rule.
+- Adapt to the host's actual capabilities. Do not assume support for background workers, message passing, context forking, or explicit worker shutdown unless the environment provides them.
 
 ## Choose the Pattern
 
