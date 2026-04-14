@@ -1,8 +1,7 @@
 Write one commit message for the current changes.
 
 Use Conventional Commits: `<type>(<scope>): <imperative summary>`.
-Scope is optional. Valid types: `feat`, `fix`, `refactor`, `perf`, `docs`,
-`test`, `chore`, `build`, `ci`, `style`, `revert`.
+Scope is optional. Valid types: `feat`, `fix`, `refactor`, `perf`, `docs`, `test`, `chore`, `build`, `ci`, `style`, `revert`.
 
 Rules:
 
