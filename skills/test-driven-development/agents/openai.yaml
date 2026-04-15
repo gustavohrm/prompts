@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test-Driven Development"
+  short_description: "Enforce strict test-first red-green-refactor"
+  default_prompt: "Use $test-driven-development to implement changes with strict test-first TDD: write a failing test first, verify RED, add minimal code for GREEN, verify the full relevant suite, refactor safely, and apply testing anti-pattern guardrails when mocks are involved."
