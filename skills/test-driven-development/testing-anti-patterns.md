@@ -16,7 +16,8 @@ tools for isolation, not the target of assertions.
 1. Never test mock existence instead of behavior.
 2. Never add test-only methods to production APIs.
 3. Never mock dependencies you do not understand.
-4. Never use partial mocks for data structures with required fields.
+4. Do not use partial mocks for structured payloads unless fixture builders
+   provide all required fields by default.
 ```
 
 ## Anti-Pattern 1: Testing Mock Behavior
@@ -92,8 +93,8 @@ Problem:
 
 Fix:
 
-- mirror real response/request schemas completely
-- include required metadata and nested fields
+- include all required fields, metadata, and nested defaults from real schemas
+- prefer fixture builders/factories so tests override only fields under test
 - centralize canonical fixtures when the structure is reused
 
 Gate check:

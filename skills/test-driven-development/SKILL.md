@@ -15,17 +15,6 @@ smallest possible implementation, then refactor while keeping tests green.
 **Core principle:** If the test did not fail first for the expected reason, the
 test does not prove the behavior.
 
-**Rule clarity:** Violating the letter of TDD is violating the spirit of TDD.
-
-**Announce at start:** "I'm using the test-driven-development skill to
-implement this change."
-
-## Tool Compatibility
-
-- Keep instructions tool-agnostic and avoid provider-specific wording.
-- When behavior differs across tools, resolve conflicts in this order:
-  OpenCode > Claude Code > Codex CLI > Gemini CLI.
-
 ## When To Use
 
 Apply this workflow for:
@@ -131,12 +120,13 @@ Run:
 
 - the targeted test
 - nearby related tests
-- full relevant suite before finishing
-- if baseline tests are flaky, run the exact verification commands before coding
-  and capture failing test IDs plus error signatures as baseline evidence
+- tests in changed modules or packages
+- tests that cover touched public interfaces and integration boundaries
+- repo-required smoke or pre-merge suites before finishing
 
-For this skill, "full relevant suite" means all tests in changed modules or
-packages, plus tests covering modified interfaces and integration boundaries.
+If baseline tests are flaky, run the exact verification commands before coding
+and capture failing test IDs plus error signatures as baseline evidence.
+
 If uncertain, run the broader suite.
 
 Confirm:
@@ -146,7 +136,14 @@ Confirm:
   and error signatures remain
 - no new warnings or runtime errors
 
-If other tests fail, fix them before proceeding.
+Failure triage when tests fail:
+
+- baseline match: test ID and error signature match baseline evidence exactly;
+  document it and continue
+- new or drifted failure: treat as regression and fix before proceeding
+- infrastructure failure (runner outage, dependency timeout): re-run the same
+  command once; if still failing and clearly unrelated to changed paths,
+  document evidence and ask the user before completion
 
 Use identical verification commands when comparing post-change results against
 baseline evidence.
@@ -176,24 +173,23 @@ Move to the next behavior with a new failing test.
 
 ## Test Quality Rules
 
-| Quality | Good | Bad |
-| --- | --- | --- |
-| Focus | One behavior per test | Multiple behaviors in one test |
-| Naming | Describes expected behavior | Vague names like `test1` |
-| Intent | Validates externally visible behavior | Validates private implementation details |
-| Dependencies | Real collaborators when practical | Heavy mocking without clear need |
+| Quality      | Good                                  | Bad                                      |
+| ------------ | ------------------------------------- | ---------------------------------------- |
+| Focus        | One behavior per test                 | Multiple behaviors in one test           |
+| Naming       | Describes expected behavior           | Vague names like `test1`                 |
+| Intent       | Validates externally visible behavior | Validates private implementation details |
+| Dependencies | Real collaborators when practical     | Heavy mocking without clear need         |
 
 ## Common Rationalizations
 
-| Excuse | Reality |
-| --- | --- |
-| "It is too small to test." | Small code breaks too. The test is cheap insurance. |
-| "I will add tests after coding." | Passing tests written after code do not prove they can fail correctly. |
-| "I already tested manually." | Manual checks are not repeatable regression protection. |
-| "Deleting work is wasteful." | Keeping unverified code creates future bugs and rework. |
-| "Tests after are equivalent." | Tests-after ask what code does; tests-first define what code should do. |
-| "It is spirit, not ritual." | Skipping fail-first breaks the spirit and invalidates TDD proof. |
-| "TDD is dogmatic. I am being pragmatic." | Pragmatic delivery includes repeatable tests that fail first. |
+| Excuse                                   | Reality                                                                 |
+| ---------------------------------------- | ----------------------------------------------------------------------- |
+| "It is too small to test."               | Small code breaks too. The test is cheap insurance.                     |
+| "I will add tests after coding."         | Passing tests written after code do not prove they can fail correctly.  |
+| "I already tested manually."             | Manual checks are not repeatable regression protection.                 |
+| "Deleting work is wasteful."             | Keeping unverified code creates future bugs and rework.                 |
+| "Tests after are equivalent."            | Tests-after ask what code does; tests-first define what code should do. |
+| "TDD is dogmatic. I am being pragmatic." | Pragmatic delivery includes repeatable tests that fail first.           |
 
 If these appear, stop and return to RED.
 
@@ -207,7 +203,7 @@ Stop and restart the cycle when you see:
 - inability to explain why the test failed
 - mock-heavy tests that do not validate real behavior
 - phrases like "just this once" or "I already manually tested it"
-- phrases like "it is spirit, not ritual" or "I am being pragmatic"
+- phrases that rationalize skipping fail-first behavior
 
 ## Bug Fix Pattern
 
