@@ -2,6 +2,15 @@
 
 Testing different variants of portable skill authoring guidance to find what actually makes agents discover and follow those rules under pressure.
 
+## Contents
+
+- Test Scenarios
+- Documentation Variants to Test
+- Testing Protocol
+- Success Criteria
+- Expected Results
+- Next Steps
+
 ## Test Scenarios
 
 ### Scenario 1: Time Pressure + Confidence

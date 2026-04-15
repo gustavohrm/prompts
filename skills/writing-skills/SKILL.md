@@ -1,6 +1,6 @@
 ---
 name: writing-skills
-description: Use when explicitly asked to create, revise, or validate a skill.
+description: Use when creating, reviewing, testing, revising, or validating skill bundles, including SKILL.md and supporting files.
 metadata:
   short-description: Create and validate reusable skills
 ---
@@ -86,21 +86,38 @@ Suggested body shape:
 
 The entire skill creation process follows RED-GREEN-REFACTOR.
 
+## Change Types and Validation Depth
+
+Classify each update before editing:
+
+- **Behavioral change:** modifies triggers, required or forbidden actions, workflow ordering, escalation gates, tool expectations, or anything likely to change agent decisions
+- **Editorial change:** wording, formatting, typo fixes, heading cleanup, or link/path corrections intended to preserve behavior
+
+Validation policy:
+
+- Behavioral changes require full RED-GREEN-REFACTOR with a failing baseline first
+- Editorial changes require lightweight validation:
+  1. state the no-behavior-change intent
+  2. run at least one before/after scenario or targeted prompt to confirm unchanged decisions
+  3. verify frontmatter, links, and references still follow local skill rules
+- If uncertain whether a change is behavioral, treat it as behavioral
+
 ## The Iron Law
 
 ```text
-NO SKILL WITHOUT A FAILING TEST FIRST
+NO BEHAVIORAL SKILL CHANGE WITHOUT A FAILING TEST FIRST
 ```
 
-This applies to new skills and edits to existing skills.
+This applies to new skills and any edit that can change agent behavior.
 
-Write or edit a skill before baseline testing? Discard that draft and start from an observed failure instead.
+For editorial or reference-only updates, use the lightweight validation policy above.
 
-**No exceptions:**
+Write or edit a behavioral skill change before baseline testing? Discard that draft and start from an observed failure instead.
+
+**No exceptions for behavioral edits:**
 
 - Not for simple additions
 - Not for a new section that feels obvious
-- Not for documentation-only changes to the skill itself
 - Do not keep untested wording as reference material
 - Do not adapt the draft while pretending you are still in RED
 
@@ -185,16 +202,18 @@ Do not:
 
 ## Compact Checklist
 
-Use the session task tracker for each item:
+Use your task tracker or checklist for each item:
 
-- [ ] Observed baseline failure without the skill
-- [ ] Captured failures and rationalizations verbatim
+- [ ] Classified the change as behavioral or editorial
+- [ ] For behavioral changes, observed baseline failure without the skill
+- [ ] For behavioral changes, captured failures and rationalizations verbatim
+- [ ] For editorial changes, documented no-behavior-change intent and ran a before/after check
 - [ ] Chose a clear, discoverable name
 - [ ] Wrote a trigger-focused description with searchable terms
-- [ ] Wrote the minimal content needed to address the observed failures
+- [ ] Wrote the minimal content needed to address observed failures or the stated editorial intent
 - [ ] Justified every supporting file
 - [ ] Re-ran scenarios with the skill present
-- [ ] Closed new loopholes and re-tested
+- [ ] Closed new loopholes and re-tested when behavior changed
 
 ## Bottom Line
 

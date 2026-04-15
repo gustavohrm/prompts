@@ -2,6 +2,21 @@
 
 **Load this reference when:** creating or editing skills, before deployment, to verify they work under pressure and resist rationalization.
 
+## Contents
+
+- When to Use
+- Validation Depth by Change Type
+- TDD Mapping for Skill Testing
+- RED Phase: Baseline Testing
+- GREEN Phase: Write Minimal Skill
+- VERIFY GREEN: Pressure Testing
+- REFACTOR Phase: Close Loopholes
+- Meta-Testing
+- When the Skill Is Bulletproof
+- Testing Checklist
+- Common Mistakes
+- Quick Reference
+
 ## Overview
 
 Testing skills is test-driven development applied to process documentation.
@@ -23,6 +38,21 @@ Test skills that:
 Do not spend this level of testing on:
 - Pure reference skills with no meaningful choices to violate
 - Skills with no rules or constraints to enforce
+
+## Validation Depth by Change Type
+
+Choose testing depth based on what changed.
+
+- **Behavioral changes or new skills:** run full RED-GREEN-REFACTOR
+- **Editorial or reference-only updates:** run lightweight validation instead of a full pressure campaign
+
+Lightweight validation loop:
+
+1. State that behavior should not change.
+2. Run one before/after prompt pair that targets the edited wording.
+3. Confirm the same decision or policy outcome before and after.
+4. Verify links, frontmatter, and references still resolve.
+5. If behavior changed or uncertainty remains, escalate to full RED-GREEN-REFACTOR.
 
 ## TDD Mapping for Skill Testing
 

@@ -2,6 +2,16 @@
 
 Optional heuristics for making skills easier to discover, load, and use. `SKILL.md` carries the core operating model; this file is for sharpening structure, examples, and supporting material.
 
+## Contents
+
+- Core Principles
+- Structure and Discovery
+- Progressive Disclosure
+- Authoring Patterns
+- Supporting Files and Executable Assets
+- Evaluation and Iteration
+- Sanity Check
+
 ## Core Principles
 
 ### Concise Is Key

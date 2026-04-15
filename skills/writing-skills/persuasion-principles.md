@@ -1,5 +1,15 @@
 # Persuasion Principles for Skill Design
 
+## Contents
+
+- Overview
+- The Seven Principles
+- Principle Combinations by Skill Type
+- Why This Works
+- Ethical Use
+- Research Citations
+- Quick Reference
+
 ## Overview
 
 Language models respond to many of the same persuasion principles that influence people. Understanding that helps you design skills that hold up under pressure.
