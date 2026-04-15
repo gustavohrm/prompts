@@ -77,6 +77,7 @@ Fix:
 2. Identify which dependency is slow, flaky, or external.
 3. Mock only that boundary.
 4. Preserve side effects the test relies on.
+5. If dependency behavior is unclear, map required side effects before mocking.
 
 Red flags:
 

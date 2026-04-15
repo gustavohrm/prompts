@@ -1,6 +1,6 @@
 ---
 name: test-driven-development
-description: Use when implementing features, bug fixes, refactors, or behavior changes that should follow strict test-first TDD with red-green-refactor.
+description: Use when an agent must do feature work, bug fixes, refactors, or behavior changes with fail-first TDD.
 metadata:
   short-description: Enforce test-first development
 ---
@@ -35,8 +35,11 @@ Any configuration change that can affect runtime behavior (flags, permissions,
 routing, dependency resolution, build output, or environment loading) requires
 tests.
 
-Do not self-approve exception paths. If explicit user confirmation is missing,
-default to full TDD.
+Do not self-approve exception paths.
+
+When a change appears to qualify for the config-only exception and explicit
+confirmation is missing, ask once for explicit confirmation for this exact
+change. If confirmation is still missing, run full TDD.
 
 If there is any uncertainty about runtime impact, treat the change as behavior
 changing and run tests.
@@ -61,7 +64,7 @@ NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
 
 If production code is written before a failing test:
 
-1. Delete that code.
+1. Remove that code from the intended delivery change set.
 2. Write the failing test.
 3. Re-implement from the test.
 
@@ -69,7 +72,8 @@ No exceptions:
 
 - Do not keep the old code as "reference".
 - Do not adapt pre-written code while pretending to do RED.
-- Delete means delete.
+- Do not use destructive version-control operations just to enforce this rule.
+- Delete means delete from the delivery path.
 
 ## Red-Green-Refactor Loop
 
@@ -92,12 +96,11 @@ Run the targeted test.
 
 Confirm:
 
-- test fails (not errors)
-- failure reason matches the missing behavior
-- failure is not caused by setup, typos, or stale fixtures
+- test fails for the expected missing-behavior reason
+- failure is not caused by setup, typos, stale fixtures, or harness issues
 
-If the test errors, fix setup and re-run until it fails for the expected
-missing behavior.
+If the failure is a setup or harness error, fix setup and re-run until the
+failure reflects the expected missing behavior.
 
 If the test passes immediately, it is not proving new behavior. Fix the test or
 choose a different scenario.
@@ -124,8 +127,9 @@ Run:
 - tests that cover touched public interfaces and integration boundaries
 - repo-required smoke or pre-merge suites before finishing
 
-If baseline tests are flaky, run the exact verification commands before coding
-and capture failing test IDs plus error signatures as baseline evidence.
+If baseline failures exist before coding (flaky or not), run the exact
+verification commands before coding and capture failing test IDs plus error
+signatures as baseline evidence.
 
 If uncertain, run the broader suite.
 
@@ -136,22 +140,8 @@ Confirm:
   and error signatures remain
 - no new warnings or runtime errors
 
-Failure triage when tests fail:
-
-- baseline match: test ID and error signature match baseline evidence exactly;
-  document it and continue
-- new or drifted failure: treat as regression and fix before proceeding
-- infrastructure failure (runner outage, dependency timeout): re-run the same
-  command once; if still failing and clearly unrelated to changed paths,
-  document evidence and ask the user before completion
-
-Use identical verification commands when comparing post-change results against
-baseline evidence.
-
-Do not re-label new failures as "known flaky".
-
-If a flaky test was touched by your change, stabilize it now or quarantine it
-with a documented follow-up issue before completion.
+For baseline handling and flaky failure triage, use
+`verification-baselines.md`.
 
 ### 5) REFACTOR - Improve Design Safely
 
@@ -223,6 +213,9 @@ reproduction or characterization test.
 
 When adding or changing tests, especially with mocks, review
 `testing-anti-patterns.md`.
+
+When baseline failures or flaky tests appear during verification, review
+`verification-baselines.md`.
 
 ## Verification Checklist
 
