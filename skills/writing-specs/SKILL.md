@@ -20,7 +20,7 @@ Write the validated design as a complete spec, review it for planning readiness,
 
 ## Save Specs To
 
-- Prefer `.docs/specs/YYYY-MM-DD--design.md`.
+- Prefer `.docs/specs/NNNN--short-kebab-title.md` (for example `.docs/specs/0001--design-auth-session-lifecycle.md`).
 - Before choosing the path, inspect the project for an existing structure and respect it if one is already in use, for example `docs/superpowers/specs/`, `.docs/specs/`, or another documented path.
 - User preferences for spec location override this default.
 
@@ -33,7 +33,7 @@ Write the validated design as a complete spec, review it for planning readiness,
 
 - Capture the validated design, not a fresh brainstorming pass.
 - Start in `Draft` status.
-- Cover the design clearly enough that `writing-plans` can turn it into an implementation plan without guessing.
+- Cover the design clearly enough that engineers can plan and implement it without guessing.
 - Cover architecture, components, data flow, error handling, and testing.
 - If the project is too large for a single implementation plan, split it into sub-project specs instead of forcing everything into one document.
 
@@ -44,7 +44,7 @@ Write the validated design as a complete spec, review it for planning readiness,
 3. Run the spec self-review loop.
 4. Ask the user to review the written spec before proceeding.
 5. Never mark the spec `Approved` on your own. The user must update it, or you may update it only if they explicitly ask you to.
-6. Only after the spec is documented as `Approved`, invoke `writing-plans` unless the user explicitly asks to proceed without documented approval.
+6. Only after the spec is documented as `Approved`, proceed to implementation planning unless the user explicitly asks to proceed without documented approval.
 
 ## Spec Self-Review
 
@@ -67,7 +67,6 @@ Wait for the user's response. If they request changes, make them and re-run the 
 
 ## Implementation Planning
 
-- Invoke `writing-plans` to create a detailed implementation plan.
-- Approved work should normally continue into planning and implementation that prefer subagents plus a new branch, atomic commits, and a PR at the end.
-- If repo conventions or the user ask for another approach, follow that instead.
+- If the user asks for planning support, you may invoke `writing-plans` to create a detailed implementation plan.
+- Follow repo conventions and user workflow for planning and implementation handoff.
 - Do NOT invoke `writing-plans` or any implementation skill before the written spec is documented as `Approved`, unless the user explicitly instructs otherwise.

@@ -15,7 +15,7 @@ Assume they are a skilled developer, but know almost nothing about the toolset o
 
 **Announce at start:** "I'm using the writing-plans skill to create the implementation plan."
 
-**Context:** Default to implementation on a new branch or isolated worktree, with atomic commits and a PR at the end. If repo conventions or explicit user instructions call for another approach, follow that instead.
+**Context:** In planning context, include implementation workflow guidance when useful (often: new branch or isolated worktree, atomic commits, and a PR at the end). If repo conventions or explicit user instructions call for another approach, follow that instead.
 
 ## Tool Compatibility
 
@@ -24,7 +24,7 @@ Assume they are a skilled developer, but know almost nothing about the toolset o
 
 ## Save Plans To
 
-- Prefer `.docs/plans/YYYY-MM-DD-.md`.
+- Prefer `.docs/plans/NNNN--kebab-case-plan-name.md` (for example, `.docs/plans/0001--add-bulk-export-plan.md`).
 - Before choosing the path, inspect the project for an existing structure and respect it if one is already in use, for example `docs/superpowers/plans/`, `.docs/plans/`, or another documented path.
 - User preferences for plan location override this default.
 
@@ -35,7 +35,8 @@ Assume they are a skilled developer, but know almost nothing about the toolset o
 
 ## Approval Gate
 
-- Only write a plan from a spec documented as `Approved`, unless the user explicitly asks you to proceed without documented approval.
+- Prefer writing plans from a spec documented as `Approved`.
+- If no approved spec is available, write from explicit user-provided requirements when the user asks you to proceed.
 - Never mark a spec or plan `Approved` on your own. The user must update it, or you may update it only if they explicitly ask you to.
 
 ## Scope Check
@@ -70,8 +71,8 @@ This structure informs the task decomposition. Each task should produce self-con
 
 **Status:** Draft
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use `executing-plans` to implement this plan task-by-task.
-> Default implementation mode is delegated execution via subagents when available. Default git flow is a new branch, atomic commits, and a PR at the end unless repo conventions or explicit user instructions say otherwise.
+> **For agentic workers:** Optional sub-skill: use `executing-plans` to implement this plan task-by-task when delegated execution is preferred.
+> Delegated and inline execution are both valid. When useful, default git flow is a new branch, atomic commits, and a PR at the end unless repo conventions or explicit user instructions say otherwise.
 
 **Goal:** [One sentence describing what this builds]
 **Architecture:** [2-3 sentences about approach]

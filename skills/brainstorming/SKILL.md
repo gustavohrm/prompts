@@ -25,7 +25,7 @@ Use these stages as the default flow. For complex work, cover them all. For simp
 2. **Ask clarifying questions** - keep them simple and direct; group closely related easy questions when they can be answered together; separate questions that need discussion
 3. **Propose options** - compare 2-3 approaches when there are meaningful choices; otherwise state the single obvious approach and why it is sufficient
 4. **Present design** - for complex work, present the design in sections, get a response on each section, revisit any deferred or partial approvals, then give a short summary of the full design and get one final approval; for simple work, a single concise design and one approval is enough
-5. **Transition or stop** - invoke `writing-specs` when the approved design should be documented or carried forward in the default pipeline; if the user wants to proceed directly, do not force more planning; if the user explicitly wants brainstorming only, stop after the approved design; if the next step is unclear, ask one short question
+5. **Transition or stop** - invoke `writing-specs` when the approved design should be documented or carried forward in the default pipeline; if the user wants to proceed directly, complete brainstorming and hand off to implementation outside this skill; if the user explicitly wants brainstorming only, stop after the approved design; if the next step is unclear, ask one short question
 
 ## Tool Compatibility
 
@@ -45,12 +45,12 @@ Explore project context
   -> Final design approved?
      -> no: revise and continue
      -> yes + wants documentation or wants to continue in the default pipeline: invoke writing-specs
-     -> yes + wants to proceed directly: brainstorming complete; proceed to the change
+     -> yes + wants to proceed directly: brainstorming complete; end this skill and hand off to the implementation phase
      -> yes + explicitly wants brainstorming only: stop after the approved design
      -> yes + next step unclear: ask one short question
 ```
 
-Do NOT invoke `frontend-design` or any other implementation skill from brainstorming.
+Do NOT invoke `frontend-design` or any other implementation skill from brainstorming. If the user wants to proceed directly, finish brainstorming first, then let implementation happen as the next phase outside this skill.
 
 Invoke `writing-specs` only when the approved design should be documented or used to continue into the default pipeline. If the user explicitly wants to stop at brainstorming, defer documentation, or proceed directly to the change, do not force it. When the user's intent is unclear after final design approval, ask one short question such as `Do you want more planning first, or should I proceed to the change?`.
 
@@ -61,7 +61,7 @@ Invoke `writing-specs` only when the approved design should be documented or use
 - Inspect enough of the current project state first: relevant files, docs, or recent commits when helpful. If the request is obviously too large for one design/spec, do only enough inspection to confirm that and move straight to decomposition.
 - Decide whether the request needs the full brainstorming flow or a lightweight design confirmation. Use the full flow for new functionality, behavior changes, unclear requirements, multiple reasonable approaches, or work that spans multiple components. For trivial, low-risk, self-evident changes with one obvious path, keep the design brief but still confirm it before moving on. If unsure, use the full flow.
 - Before asking detailed questions, assess scope. If the request describes multiple independent subsystems, for example "build a platform with chat, file storage, billing, and analytics", flag this immediately. Do not spend questions refining details of a project that needs to be decomposed first.
-- If the project is too large for a single spec, decompose it into sub-projects, recommend the first sub-project to tackle, and get agreement on that slice before going deeper. Then brainstorm that sub-project through the normal design flow. Each sub-project gets its own spec, plan, and implementation cycle.
+- If the project is too large for a single spec, decompose it into sub-projects, recommend the first sub-project to tackle, and get agreement on that slice before going deeper. Then brainstorm that sub-project through the normal design flow. In the default workflow, each sub-project gets its own spec-first cycle before implementation; if the user wants a different handoff, follow that intent.
 - For appropriately scoped projects, ask simple, direct questions to refine the idea.
 - Group closely related easy questions when the user can answer them together. If a question is complex, high-impact, or likely to need back-and-forth, ask it by itself.
 - Prefer multiple choice questions when possible, but open-ended is fine too.
@@ -106,7 +106,7 @@ Invoke `writing-specs` only when the approved design should be documented or use
 - If the user explicitly wants brainstorming only or to defer documentation, stop after the approved design instead of forcing a handoff.
 - If the user wants to keep going but it is unclear whether they want more planning or direct implementation, ask `Do you want more planning first, or should I proceed to the change?`.
 - If the user explicitly wants to proceed directly, do not force `writing-specs`.
-- Do NOT invoke `writing-plans` directly from brainstorming.
+- Keep `writing-specs` as the default handoff for documented, spec-first work. If the user explicitly asks to do planning next, you may invoke `writing-plans` directly instead.
 
 ## Key Principles
 
