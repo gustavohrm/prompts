@@ -1,24 +1,19 @@
 # Testing Anti-Patterns
 
-Load this reference when writing tests, adding mocks, or considering test-only
-helpers in production code.
+Load this reference when writing tests, adding mocks, or considering test-only helpers in production code.
 
 ## Overview
 
-Tests should verify behavior that matters to users and calling code. Mocks are
-tools for isolation, not the target of assertions.
+Tests should verify behavior that matters to users and calling code. Mocks are tools for isolation, not the target of assertions.
 
 **Core principle:** Test real behavior, not mock behavior.
 
 ## Iron Rules
 
-```text
 1. Never test mock existence instead of behavior.
 2. Never add test-only methods to production APIs.
 3. Never mock dependencies you do not understand.
-4. Do not use partial mocks for structured payloads unless fixture builders
-   provide all required fields by default.
-```
+4. Do not use partial mocks for structured payloads unless fixture builders provide all required fields by default.
 
 ## Anti-Pattern 1: Testing Mock Behavior
 
@@ -33,12 +28,7 @@ Fix:
 - use real collaborators when practical
 - if mocking is required, assert the unit output, not mock rendering details
 
-Gate check before adding assertions:
-
-```text
-Am I checking behavior of the system under test,
-or only confirming a mock exists?
-```
+Gate check before adding assertions: Am I checking behavior of the system under test, or only confirming a mock exists?
 
 If it is only mock existence, rewrite the test.
 
@@ -54,12 +44,7 @@ Fix:
 - move cleanup/setup behavior to test utilities
 - keep production APIs focused on production use cases
 
-Gate check before adding a method:
-
-```text
-Is this method required by production behavior,
-or only by test setup/cleanup?
-```
+Gate check before adding a method: Is this method required by production behavior, or only by test setup/cleanup?
 
 If only tests need it, place it in test support code.
 
@@ -98,12 +83,7 @@ Fix:
 - prefer fixture builders/factories so tests override only fields under test
 - centralize canonical fixtures when the structure is reused
 
-Gate check:
-
-```text
-Does this mock represent the real schema,
-or only the subset I remembered?
-```
+Gate check: Does this mock represent the real schema, or only the subset I remembered?
 
 ## Anti-Pattern 5: Tests as a Final Step
 
@@ -134,12 +114,7 @@ Response:
 - mock only true external boundaries (network, process, filesystem, time)
 - keep assertions focused on observable behavior
 
-Gate check:
-
-```text
-Are mocks helping isolate the behavior,
-or replacing the behavior under test?
-```
+Gate check: Are mocks helping isolate the behavior, or replacing the behavior under test?
 
 If mocks are replacing behavior, reduce mocking or move to an integration test.
 
@@ -156,7 +131,5 @@ If any answer is "yes", revisit your test design:
 
 ## Bottom Line
 
-```text
 Use mocks to isolate boundaries, not to fake confidence.
 Behavior-first tests + strict TDD prevent most test anti-patterns.
-```

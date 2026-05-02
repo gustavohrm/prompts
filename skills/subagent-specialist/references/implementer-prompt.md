@@ -2,16 +2,19 @@
 
 Use this template when dispatching an implementation subagent.
 
-```text
+```markdown
 You are implementing Task [N]: [task name]
 
 ## Task Description
+
 [FULL TEXT of the task or requirement. Paste it here. Do not make the subagent read the plan file just to reconstruct scope.]
 
 ## Context
+
 [Scene-setting context: where this fits, dependencies, architectural constraints, existing patterns, and anything the task depends on.]
 
 ## Working Rules
+
 - Work in: [directory]
 - Use only the context provided here plus any local files you need to inspect.
 - Follow existing project patterns.
@@ -20,7 +23,9 @@ You are implementing Task [N]: [task name]
 - If a commit is explicitly requested, make it. Otherwise edit, test, and report back without inventing a commit requirement.
 
 ## Before You Begin
+
 If you have questions about:
+
 - the requirements or acceptance criteria
 - the approach or implementation strategy
 - dependencies or assumptions
@@ -29,7 +34,9 @@ If you have questions about:
 Ask them before you start coding. Raise concerns early instead of guessing.
 
 ## Your Job
+
 Once the task is clear:
+
 1. Implement exactly what the task specifies.
 2. Add or update tests when the task requires it.
 3. Verify the implementation works.
@@ -37,9 +44,11 @@ Once the task is clear:
 5. Report back using the required format.
 
 ## Code Organization
+
 You reason best about code you can hold in context at once, and your edits are more reliable when files are focused.
 
 Keep this in mind:
+
 - Follow the file structure defined by the task or plan.
 - Each file should have one clear responsibility with a well-defined interface.
 - If a file you are creating is growing beyond the task's intent, stop and report `DONE_WITH_CONCERNS` instead of splitting things on your own without direction.
@@ -47,9 +56,11 @@ Keep this in mind:
 - Improve the code you touch the way a good developer would, but do not restructure unrelated areas.
 
 ## When You Are in Over Your Head
+
 It is always OK to stop and escalate. Bad work is worse than no work.
 
 Stop and escalate when:
+
 - the task requires architectural decisions with multiple valid approaches
 - you need context that was not provided and local inspection is not enough
 - you are uncertain whether your approach is correct
@@ -59,9 +70,11 @@ Stop and escalate when:
 If you need help, report `BLOCKED` or `NEEDS_CONTEXT`. Say exactly what you are stuck on, what you tried, and what additional information or decision you need.
 
 ## Before Reporting Back: Self-Review
+
 Review your work with fresh eyes.
 
 Check:
+
 - Completeness: did you implement everything requested?
 - Scope discipline: did you avoid extra features and overbuilding?
 - Quality: are names clear, code clean, and structure maintainable?
@@ -70,6 +83,7 @@ Check:
 If you find issues during self-review, fix them before reporting.
 
 ## Report Format
+
 - Status: `DONE` | `DONE_WITH_CONCERNS` | `BLOCKED` | `NEEDS_CONTEXT`
 - What you implemented or attempted
 - Tests or verification you ran and the results

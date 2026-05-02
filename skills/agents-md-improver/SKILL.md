@@ -7,11 +7,9 @@ metadata:
 
 # AGENTS.md Improver
 
-Audit, evaluate, and improve `AGENTS.md` files across a codebase so future
-agent sessions have better project guidance.
+Audit, evaluate, and improve `AGENTS.md` files across a codebase so future agent sessions have better project guidance.
 
-This skill can update `AGENTS.md` files. After presenting a quality report and
-getting user approval, it makes targeted improvements.
+This skill can update `AGENTS.md` files. After presenting a quality report and getting user approval, it makes targeted improvements.
 
 ## Tool Compatibility
 
@@ -25,40 +23,34 @@ getting user approval, it makes targeted improvements.
 Determine the target file before auditing anything:
 
 1. If the user explicitly names a file, use that file as the primary target.
-2. Otherwise, search for `AGENTS.md` files and default to the project root
-   `AGENTS.md` when it exists.
-3. Only inspect related instruction files such as `AGENTS_LONG.md` when the
-   user asks for them or they are necessary to explain the target file.
+2. Otherwise, search for `AGENTS.md` files and default to the project root `AGENTS.md` when it exists.
+3. Only inspect related instruction files when the user asks for them or they are necessary to explain the target file.
 
-Use the host environment's file search capability instead of assuming shell
-commands like `find` are available.
+Use the host environment's file search capability instead of assuming shell commands like `find` are available.
 
 **File Types & Locations:**
 
-| Type | Location | Purpose |
-|------|----------|---------|
-| Explicit target | User-provided path | Highest-priority file to audit |
-| Project root | `./AGENTS.md` | Primary shared project instructions |
-| Package-specific | `./packages/*/AGENTS.md` | Module-level guidance in monorepos |
-| Subdirectory | Any nested location | Feature or domain-specific instructions |
-| Related guides | `AGENTS_LONG.md` or similar | Supplemental context only when requested |
+| Type             | Location                 | Purpose                                 |
+| ---------------- | ------------------------ | --------------------------------------- |
+| Explicit target  | User-provided path       | Highest-priority file to audit          |
+| Project root     | `./AGENTS.md`            | Primary shared project instructions     |
+| Package-specific | `./packages/*/AGENTS.md` | Module-level guidance in monorepos      |
+| Subdirectory     | Any nested location      | Feature or domain-specific instructions |
 
 ### Phase 2: Quality Assessment
 
-For each target `AGENTS.md` file, evaluate against the quality criteria. See
-[references/quality-criteria.md](references/quality-criteria.md) for detailed
-rubrics.
+For each target `AGENTS.md` file, evaluate against the quality criteria. See [references/quality-criteria.md](references/quality-criteria.md) for detailed rubrics.
 
 **Quick Assessment Checklist:**
 
-| Criterion | Weight | Check |
-|-----------|--------|-------|
-| Commands and workflows documented | High | Are build, test, lint, and common operations present? |
-| Architecture clarity | High | Can the agent understand the codebase structure and boundaries? |
-| Non-obvious patterns | Medium | Are gotchas, quirks, and exceptions documented? |
-| Conciseness | Medium | Is the file dense and useful instead of verbose? |
-| Currency | High | Does it reflect the current codebase state? |
-| Actionability | High | Are instructions concrete and executable? |
+| Criterion                         | Weight | Check                                                           |
+| --------------------------------- | ------ | --------------------------------------------------------------- |
+| Commands and workflows documented | High   | Are build, test, lint, and common operations present?           |
+| Architecture clarity              | High   | Can the agent understand the codebase structure and boundaries? |
+| Non-obvious patterns              | Medium | Are gotchas, quirks, and exceptions documented?                 |
+| Conciseness                       | Medium | Is the file dense and useful instead of verbose?                |
+| Currency                          | High   | Does it reflect the current codebase state?                     |
+| Actionability                     | High   | Are instructions concrete and executable?                       |
 
 **Quality Scores:**
 
@@ -74,10 +66,11 @@ Always output the quality report before making any updates.
 
 Format:
 
-```text
+```markdown
 ## AGENTS.md Quality Report
 
 ### Summary
+
 - Files found: X
 - Average score: X/100
 - Files needing update: X
@@ -85,24 +78,28 @@ Format:
 ### File-by-File Assessment
 
 #### 1. ./AGENTS.md (Project Root)
+
 **Score: XX/100 (Grade: X)**
 
-| Criterion | Score | Notes |
-|-----------|-------|-------|
-| Commands and workflows | X/20 | ... |
-| Architecture clarity | X/20 | ... |
-| Non-obvious patterns | X/15 | ... |
-| Conciseness | X/15 | ... |
-| Currency | X/15 | ... |
-| Actionability | X/15 | ... |
+| Criterion              | Score | Notes |
+| ---------------------- | ----- | ----- |
+| Commands and workflows | X/20  | ...   |
+| Architecture clarity   | X/20  | ...   |
+| Non-obvious patterns   | X/15  | ...   |
+| Conciseness            | X/15  | ...   |
+| Currency               | X/15  | ...   |
+| Actionability          | X/15  | ...   |
 
 **Issues:**
+
 - [List specific problems]
 
 **Recommended additions:**
+
 - [List what should be added]
 
 #### 2. ./packages/api/AGENTS.md (Package-specific)
+
 ...
 ```
 
@@ -133,32 +130,28 @@ updating anything.
 
 **Diff Format:**
 
-````markdown
+`````markdown
 ### Update: ./AGENTS.md
 
-**Why:** The build command was missing, which makes it harder for future
-sessions to get started quickly.
+**Why:** The build command was missing, which makes it harder for future sessions to get started quickly.
 
-```diff
+````diff
 +## Quick Start
 +
 +```bash
 +npm install
 +npm run dev  # Start development server
 +```
-```
 ````
+`````
 
 ### Phase 5: Apply Updates
 
-After user approval, apply changes using the host environment's editing
-capability. Preserve the existing content structure unless restructuring is part
-of the approved improvement.
+After user approval, apply changes using the host environment's editing capability. Preserve the existing content structure unless restructuring is part of the approved improvement.
 
 ## Templates
 
-See [references/templates.md](references/templates.md) for `AGENTS.md`
-templates by project type.
+See [references/templates.md](references/templates.md) for `AGENTS.md` templates by project type.
 
 ## Common Issues to Flag
 
@@ -203,11 +196,7 @@ When presenting recommendations, remind users:
 
 ## Failure Modes To Handle
 
-- If no target file exists, say so clearly and ask whether to create one or use a
-  different file.
-- If several candidate files exist, explain the candidates and anchor the audit
-  to the user-requested file or the root `AGENTS.md` by default.
-- If a recommendation cannot be verified from the repository, label it as
-  uncertain instead of stating it as fact.
-- If the file is already high quality, say so explicitly and avoid editing for
-  the sake of editing.
+- If no target file exists, say so clearly and ask whether to create one or use a different file.
+- If several candidate files exist, explain the candidates and anchor the audit to the user-requested file or the root `AGENTS.md` by default.
+- If a recommendation cannot be verified from the repository, label it as uncertain instead of stating it as fact.
+- If the file is already high quality, say so explicitly and avoid editing for the sake of editing.
